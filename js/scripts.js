@@ -53,9 +53,7 @@ let snake = [];
         context.fillRect(food.x, food.y, box, box);
         //vamos criar um novo elemento que será um array 
 
-
-
-    }
+  }
 //vamos criar um evento se escopo, vamos passar todos os parametros nesse evento
     document.addEventListener('keydown', update);
 //pegara o keydown - evento de clique e chama a funcao update 
@@ -97,11 +95,18 @@ function update (event){
          // ponto cartesiano - direita aumenta, esquerda diminui, por isso vamos decrementar -=
         if(direction == "up") snakeY -= box;
         if(direction == "down") snakeY += box;
-     
-        //pop - retira o ultimo elemento do nosso array 
-        snake.pop(); 
 
-        //temos o movimento mas nao temos a cabeca da cobrinha
+        //caso a posiçao snake x seja diferente dA food x e a posicao snakey seja diferente da food y, senao continua aumentando e usamos a funcao mat.floor 
+        if(snakeX != food.x && snakeY != food.y){
+            snake.pop(); 
+             //pop - retira o ultimo elemento do nosso array 
+        } 
+        else{
+            food.x = Math.floor(Math.random() * 15 + 1) * box;
+            food.y = Math.floor(Math.random() * 15 + 1) * box;
+        }
+     
+          //temos o movimento mas nao temos a cabeca da cobrinha
         //vamos criar uma nova cabeca com o unshiftmetodo que acrescentra uma no primeiro movimentoi, ou seja , a frente 
 
         let newHead = {
@@ -109,6 +114,7 @@ function update (event){
             y: snakeY
         }
 
+        
         snake.unshift(newHead);
 
 //até essa etapoa nao funciona porque é preciso fazer que a cabeca u;ltrapasse a tela e passe para o outro lado 
@@ -120,4 +126,5 @@ function update (event){
 //mexeremos com os controles para que ela nao desapareça na tela 
 //para que ande na direcao solicitada o jogo precisa captar o toque no botão e trasmita o toque naquela tela para a funcao 
 
+//para que a comidinha aumente de tamanho precisamoa checar as coordenadas e fazer com que ela acrescente e deixe de decrementar caso isso ocorra 
 
