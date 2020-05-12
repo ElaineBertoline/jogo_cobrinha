@@ -12,7 +12,17 @@ let snake = [];
         //damos o tamanho 
     //variavel para executar os movimentos da cobrinha
     let direction = "right";
-    //direção da cobrinha 
+        //direção da cobrinha 
+        let food = {
+            //elemento para a funcao drowFood
+            //para que a comidinha apareça em varios lugares diferentes vamos usar 2 métodos que fazem na criacao de numeros aleatorios 
+            x: Math.floor(Math.random() * 15 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 1) * box
+            /* math.floor retira a parte flutuante do math.randow 
+            o math.randow retorna sempre um numero aleatorio ate 1
+            floor retira a parte flutuante 0,1 até o tamanho setado que no nosso caso é o 16 
+            */
+        }
 
 //desenha e define a cor 
     function criarBG(){
@@ -38,6 +48,12 @@ let snake = [];
 
     //funçao para desenhar a comidinha
     function drawFood(){
+        context.fillStyle = "red";
+        // cor da comidinha
+        context.fillRect(food.x, food.y, box, box);
+        //vamos criar um novo elemento que será um array 
+
+
 
     }
 //vamos criar um evento se escopo, vamos passar todos os parametros nesse evento
@@ -68,6 +84,9 @@ function update (event){
       
         criarBG();
         CriarCobrinha();
+        drawFood();
+        //Após criar a funcao preisamos chamá-la no inicio do jogo 
+
         //devemos criar a posiçao da cobrinha x e y para o ponto de partida 
         let snakeX = snake[0].x;
         let snakeY = snake[0].y;
